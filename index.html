@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage with Tabs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        .tab-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .flex-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px; /* Increase text size */
+            font-weight: bold; /* Make text bold */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .tab:hover {
+            background-color: #45a049;
+        }
+        .active-tab {
+            background-color: #333;
+        }
+        .content-section {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .show {
+            display: block;
+        }
+        .result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+    </style>
+</head>
+<body>
+
+<h1>Taper Calculators</h1>
+
+<!-- Tabs Section -->
+<div class="tab-container">
+    <div class="tab active-tab" onclick="showContent('basicTaperCalculator', this)">Basic Taper Calculator</div>
+    <div class="tab" onclick="showContent('taperDDLL1', this)">2 Dia and their Locn from Base</div>
+    <div class="tab" onclick="showContent('taperDDLL2', this)">2 Dia and their Locn from Tip </div>
+    <div class="tab" onclick="showContent('taperDLAH', this)"> Dia-Locn-Angle from Base </div>
+</div>
+
+<!-- *************************----HTML----**************************-->
+<!-- BASIC TAPER CALCULATOR html -->
+<div id="basicTaperCalculator" class="content-section show">
+    <!-- Basic Taper Calculator HTML content here -->
+    <div class="flex-container">
+        <!-- Calculator Section -->
+        <div class="container">
+            <h2>Basic Taper Calculator</h2>
+            <p>Please enter any three values and click "Calculate"</p>
+
+            <label for="BTC_D">Base Diameter (D)</label>
+            <input type="number" id="BTC_D" placeholder="Enter base diameter" value="10" step="0.01">
+
+            <label for="BTC_d">Tip Diameter (d)</label>
+            <input type="number" id="BTC_d" placeholder="Enter tip diameter" value="9" step="0.01">
+
+            <label for="BTC_h">Height (h)</label>
+            <input type="number" id="BTC_h" placeholder="Enter height" value="6" step="0.01">
+
+            <label for="BTC_a">Taper Angle (a) in degrees</label>
+            <input type="number" id="BTC_a" placeholder="Enter taper angle" step="0.01">
+
+            <button onclick="btc()">Calculate</button>
+        </div>
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="MTCSchematic.png" style="height: 465px;">
+        </div>
+    </div>
+</div>
+
+<!-- DDLL TAPER CALCULATOR-1 html -->
+<div id="taperDDLL1" class="content-section">
+    <div class="flex-container">
+        <!-- Calculator Section -->
+        <div class="container">
+            <h2>INPUTS</h2>
+            <label for="DDLL1_D1">D1</label>
+            <input type="number" id="DDLL1_D1" placeholder="Enter D1" value="25.527" step="0.01">
+            
+            <label for="DDLL1_D2">D2</label>
+            <input type="number" id="DDLL1_D2" placeholder="Enter D2" value="25.3492" step="0.01">
+
+            <label for="DDLL1_y1">y1</label>
+            <input type="number" id="DDLL1_y1" placeholder="Enter y1" value="2.4384" step="0.01">
+
+            <label for="DDLL1_y2">y2</label>
+            <input type="number" id="DDLL1_y2" placeholder="Enter y2" value="2.6162" step="0.01">
+
+            <label for="DDLL1_h">h</label>
+            <input type="number" id="DDLL1_h" placeholder="Enter height" value="7.5438" step="0.01">
+            <button onclick="dDLL1()">Calculate</button>
+            <h2>OUTPUTS (a, D, d)</h2>
+            <div id="DDLL1_angle" class="result"> </div>
+            <div id="DDLL1_baseDia" class="result"> </div>
+            <div id="DDLL1_tipDia" class="result"> </div>
+        </div>
+                
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="DDLL1.png" style="height: 525px;">
+        </div>
+    </div>
+</div>
+
+<!-- DDLL TAPER CALCULATOR-2 html -->
+<div id="taperDDLL2" class="content-section">
+    <div class="flex-container">
+        <!-- Calculator Section -->
+        <div class="container">
+            <h2>INPUTS</h2>
+            <label for="DDLL2_D1">D1</label>
+            <input type="number" id="DDLL2_D1" placeholder="Enter D1" value="25.527" step="0.01">
+            
+            <label for="DDLL2_D2">D2</label>
+            <input type="number" id="DDLL2_D2" placeholder="Enter D2" value="25.3492" step="0.01">
+
+            <label for="DDLL2_y1">y1</label>
+            <input type="number" id="DDLL2_y1" placeholder="Enter y1" value="2.4384" step="0.01">
+
+            <label for="DDLL2_y2">y2</label>
+            <input type="number" id="DDLL2_y2" placeholder="Enter y2" value="2.6162" step="0.01">
+
+            <label for="DDLL2_h">h</label>
+            <input type="number" id="DDLL2_h" placeholder="Enter height" value="7.5438" step="0.01">
+            <button onclick="dDLL2()">Calculate</button>
+            <h2>OUTPUTS (a, D, d)</h2>
+            <div id="DDLL2_angle" class="result"> </div>
+            <div id="DDLL2_baseDia" class="result"> </div>
+            <div id="DDLL2_tipDia" class="result"> </div>
+        </div>
+                
+        
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="DDLL2.PNG" style="height: 525px;">
+        </div>
+    </div>
+</div>
+
+<!-- DLAH TAPER CALCULATOR html -->
+<div id="taperDLAH" class="content-section">
+    <div class="flex-container">
+        <!-- Calculator Section -->
+        <div class="container">
+            <h2>INPUTS</h2>
+            <label for="DLAH_D1">D1</label>
+            <input type="number" id="DLAH_D1" placeholder="Enter D1" value="25.527" step="0.01">
+            
+            <label for="DLAH_y1">y1</label>
+            <input type="number" id="DLAH_y1" placeholder="Enter y1" value="2.4384" step="0.01">
+
+            <label for="DLAH_a">a</label>
+            <input type="number" id="DLAH_a" placeholder="Enter angle (a) in degrees" value="2.6162" step="0.01">
+
+            <label for="DLAH_h">h</label>
+            <input type="number" id="DLAH_h" placeholder="Enter height" value="7.5438" step="0.01">
+            <button onclick="dDLAH()">Calculate</button>
+            <h2>OUTPUTS (D, d)</h2>
+            <div id="DLAH_baseDia" class="result"> </div>
+            <div id="DLAH_tipDia" class="result"> </div>
+        </div>
+                
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="DLAH.png" style="height: 525px;">
+        </div>
+    </div>
+</div>
+
+<!-- *************************----SCRIPTS----**************************-->
+<!-- BASIC TAPER CALCULATOR script -->
+<script>
+    function btc() {
+        const bigDiameterInput = document.getElementById("BTC_D");
+        const smallDiameterInput = document.getElementById("BTC_d");
+        const heightInput = document.getElementById("BTC_h");
+        const angleInput = document.getElementById("BTC_a");
+
+        const D1 = parseFloat(bigDiameterInput.value);
+        const D2 = parseFloat(smallDiameterInput.value);
+        const L = parseFloat(heightInput.value);
+        const angle = parseFloat(angleInput.value);
+
+        if (isNaN(D1)) {
+            if (!isNaN(D2) && !isNaN(L) && !isNaN(angle)) {
+                bigDiameterInput.value = (D2 + 2 * L * Math.tan(angle * Math.PI / 180)).toFixed(2);
+            } else {
+                alert("Please provide any three values to calculate the fourth.");
+            }
+        } else if (isNaN(D2)) {
+            if (!isNaN(D1) && !isNaN(L) && !isNaN(angle)) {
+                smallDiameterInput.value = (D1 - 2 * L * Math.tan(angle * Math.PI / 180)).toFixed(2);
+            } else {
+                alert("Please provide any three values to calculate the fourth.");
+            }
+        } else if (isNaN(L)) {
+            if (!isNaN(D1) && !isNaN(D2) && !isNaN(angle)) {
+                heightInput.value = ((D1 - D2) / (2 * Math.tan(angle * Math.PI / 180))).toFixed(2);
+            } else {
+                alert("Please provide any three values to calculate the fourth.");
+            }
+        } else if (isNaN(angle)) {
+            if (!isNaN(D1) && !isNaN(D2) && !isNaN(L)) {
+                angleInput.value = (Math.atan((D1 - D2) / (2 * L)) * (180 / Math.PI)).toFixed(2);
+            } else {
+                alert("Please provide any three values to calculate the fourth.");
+            }
+        } else {
+            alert("Please leave one field blank to calculate its value.");
+        }
+    }
+</script>
+
+<!-- DDLL1 TAPER CALCULATOR script -->
+<script>
+    function dDLL1() {
+        const D1 = parseFloat(document.getElementById("DDLL1_D1").value);
+        const D2 = parseFloat(document.getElementById("DDLL1_D2").value);
+        const y1 = parseFloat(document.getElementById("DDLL1_y1").value);
+        const y2 = parseFloat(document.getElementById("DDLL1_y2").value);
+        const h  = parseFloat(document.getElementById("DDLL1_h").value);
+        
+        if (isNaN(D1) || isNaN(D2) || isNaN(y1) || isNaN(y2) || isNaN(h) || h === 0) {
+        alert("Please enter valid values for all fields!");
+        return;
+        }
+        // Calculate taper angle in degrees
+        const taperAngle = (Math.atan((D1 - D2) / (2 * y2)))* (180 / Math.PI);
+        const baseDia = D1 + (2*y1*Math.tan(taperAngle*(Math.PI/180)));
+        const tipDia = 2*((D1/2) - (h*Math.tan(taperAngle*(Math.PI/180))))
+
+        // Display result
+        document.getElementById('DDLL1_angle').innerHTML = `Taper Angle (a) = ${taperAngle.toFixed(3)}°`;
+        document.getElementById('DDLL1_baseDia').innerHTML = `Base Diameter (D) = ${baseDia.toFixed(3)}`;
+        document.getElementById('DDLL1_tipDia').innerHTML = `Tip Diameter (d) = ${tipDia.toFixed(3)}`;
+        
+    }
+</script>
+
+<!-- DDLL2 TAPER CALCULATOR script -->
+<script>
+    function dDLL2() {
+        const D1 = parseFloat(document.getElementById("DDLL2_D1").value);
+        const D2 = parseFloat(document.getElementById("DDLL2_D2").value);
+        const y1 = parseFloat(document.getElementById("DDLL2_y1").value);
+        const y2 = parseFloat(document.getElementById("DDLL2_y2").value);
+        const h  = parseFloat(document.getElementById("DDLL2_h").value);
+        
+        if (isNaN(D1) || isNaN(D2) || isNaN(y1) || isNaN(y2) || isNaN(h) || h === 0) {
+        alert("Please enter valid values for all fields!");
+        return;
+        }
+        // Calculate taper angle in degrees
+        const taperAngle = (Math.atan((D1 - D2) / (2 * y2)))* (180 / Math.PI);
+        const tipDia = D2 - (2*y1*Math.tan(taperAngle*(Math.PI/180)));
+        const baseDia = tipDia + (2*h*Math.tan(taperAngle*(Math.PI/180)));
+        
+
+        // Display result
+        document.getElementById('DDLL2_angle').innerHTML = `Taper Angle (a) = ${taperAngle.toFixed(3)}°`;
+        document.getElementById('DDLL2_baseDia').innerHTML = `Base Diameter (D) = ${baseDia.toFixed(3)}`;
+        document.getElementById('DDLL2_tipDia').innerHTML = `Tip Diameter (d) = ${tipDia.toFixed(3)}`;
+    }
+</script>
+
+<!-- DLAH TAPER CALCULATOR script -->
+<script>
+    function dDLAH() {
+        const D1 = parseFloat(document.getElementById("DLAH_D1").value);
+        const y1 = parseFloat(document.getElementById("DLAH_y1").value);
+        const a = parseFloat(document.getElementById("DLAH_a").value);
+        const h  = parseFloat(document.getElementById("DLAH_h").value);
+        
+        if (isNaN(D1) || isNaN(y1) || isNaN(a) || isNaN(h) || h === 0) {
+        alert("Please enter valid values for all fields!");
+        return;
+        }
+        // Calculate taper angle in degrees
+        const baseDia = D1 + (2*y1*Math.tan(a*(Math.PI/180)));
+        const tipDia = baseDia - 2*(h*Math.tan(a*(Math.PI/180)));
+
+        // Display result
+        document.getElementById('DLAH_baseDia').innerHTML = `Base Diameter (D) = ${baseDia.toFixed(3)}`;
+        document.getElementById('DLAH_tipDia').innerHTML = `Tip Diameter (d) = ${tipDia.toFixed(3)}`;
+    }
+</script>
+
+<!-- SHOW CONTENT script -->
+<script>
+    function showContent(sectionId, tabElement) {
+        // Hide all content sections
+        document.querySelectorAll('.content-section').forEach(section => section.classList.remove('show'));
+        
+        // Show the selected content section
+        document.getElementById(sectionId).classList.add('show');
+
+        // Update active tab style
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
+        tabElement.classList.add('active-tab');
+    }
+</script>
+
+</body>
+</html>
